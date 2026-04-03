@@ -1,0 +1,185 @@
+﻿Title,Type,Section,Source,Status,Priority,Description,Submitted by,Screenshot,Timestamp,John's Notes
+News feed,💡 Idea,Tools,JM,Back Burner,Low,A list of relevant news stories from the week.,,,,
+Develop a full tutorial mode the user can toggle on ,,About,JM,Back Burner,High,Button in the header?,,,,
+Explore possibility of user customizing their layout,,,JM,Back Burner,Low,,,,,
+"Add ""moved away"" tag",,,JM,Back Burner,,and figure out how you want it to work,,,,
+Maybe: Cross-zone insights (opt-in),,,JM,Back Burner,,"If captains opt in to sharing, build:
+
+Town Overview Dashboard:
+Aggregated stats across all opt-in zones
+Trend analysis (contact rates improving? damage distribution?)
+Resource allocation insights
+""Zones needing help"" (based on contact rates, completion %)
+
+Captain-to-Captain insights:
+""Other zones with similar challenges""
+Best practices sharing (anonymized)
+Cross-zone collaboration tools",,,,
+Add Logo to Flyer Generator,,Tools,JM,Back Burner,Low,,,,,
+Former Residents tab,💡 Idea,,JM,Back Burner,Low,"I've added an additional tab to the backend spreadsheet called ""Former Residents"". When a person is marked as ""Moved away"" they should be moved to this tab.",,,,
+Refine the Send Newsletter action,,Actions,JM,Back Burner,High,Expand its features if possible. Maybe add a newsletter subscriber tag to make it easy to keep track of these people. Let's add some logic to make sure we're not emailing deceased people. ,,,,
+Add Newsletter Builder,💡 Idea,Actions,JM,Back Burner,Low,"Take that week's newsletter, put a checkbox next to each section, and let users decide which pieces they want to include in their zone newsletter. ???	
+
+PROMPT:
+
+
+Newsletter builder
+Spec out a web app for me that enables my volunteer neighborhood captains to create their own zone newsletters, drawing content from our Altogether town-wide newsletter, which comes out every two weeks. The format of our newsletter is built in something called Mailer Light, and it then just goes out as a big email to our list.
+
+What I want is for neighborhood captains to be able to look at the newsletter, either check a box or click and drag the items that they want to add to their newsletter, and then add custom stuff if they want to:
+- add a custom name for their newsletter
+- add a little logo if they want to
+- make the output something that's focused for their zone and small, and over which the neighborhood captain feels ownership
+
+
+I want it to be low friction and easy for the neighborhood captain to do. I want them to feel empowered and excited to do this each week. It needs to be lightweight, slick, and have a really good-looking output that's then very easy for them to copy and paste into an email or generate or print out so that they can deliver it in person to places.
+
+Spec out how this might work. It can be a standalone website/web app kind of thing, and then spec which I'll then link to from the zone dashboard. Also spec out: well, I don't know; tell me what you would need from me to make this happen. We need to think about what sorts of process changes might be needed from the newsletter editors to make this possible. We also need to consider that our newsletter editors are volunteers, and any solution here needs to be as easy as possible for them to do. Ok, in thinking about the editorial process for the newsletter, if it's possible, I don't know how we do this exactly, but maybe we can develop a web scraper feature that makes it easier for them to find news every week that people need. ",,,,
+normalize column widths,,Neighbors,JM,Back Burner,Low,"Great job. We should make all the column widths smart like we did with Address, except for Residents. What do you think? any drawbacks of this approach?
+
+DID NOT IMPLEMENT",,,,
+Resource Navigator,,Tools,JM,Back Burner,Low,,,,,
+Power User Map,,Other/general,,Back Burner,Medium,,,,1/26/2026 11:36pm,
+Event Planner wizard,,,,Back Burner,Low,,,,1/27/2026 4:35pm,
+Ideas Portal / Bank,,,,Back Burner,Low,A place where users can suggest features and then upvote those they like.,,,2/3/2026 4:04pm,
+Content for Tools page,,Tools,JM,Done,,,,,,
+Add map color filters,,Map,JM,Done,,,,,,
+Overhaul Details page ,,Details panel,JM,Done,,"Make sure we’re showing all the right fields.
+
+Apartment, renter, needs follow-up, Unable to reach, needs case manager
+
+prompt:
+I want to add a few binary check-boxes to both the address level and resident level. Should I add them in the spreadsheet back-end first and then tell you what they are and how i want them integrated?
+
+
+I want to change the layout of the person details in the Details view.
+Age and Gender should be on the same line.
+Home phone and Cell phone should be on the same line.",,,,
+Resolve KML map issues,,Map,JM,Done,Medium,"Currently only some of the KML files pull in, which is odd. No idea why.
+
+Maybe better: It needs to pull the kml as a live update from mapbox. And that’s also how we should be able to toggle on the full captains map.",,,,
+Tighten up overall design,,Home,JM,Done,,,,,,
+"Add Quick Actions box, with logic",,Home,JM,Done,,,,,,
+Change action behavior,,Home,JM,Done,,"see addresses without damage status -> this should go to the map
+
+and should have a whole tooltip thing goin on",,,,
+UI/UX overhaul,,Tools,JM,Done,,"
+Please interrogate and then, if you see fit based on your expertise in UI/UX, overhaul the entire list creation process with an eye toward clarity and ease of use. Assume the average user is low-tech.",,,,
+UI overhaul,,,JM,Done,,"Normalizing fonts, etc
+
+Colors for charts:
+-----
+
+CSS
+/* CSS HEX */
+--dry-sage: #b4bd9bff;
+--dusty-mauve: #bc455aff;	
+--light-caramel: #fdba77ff;
+--apricot-cream: #f6cf98ff;
+--sky-blue-light: #81bdc3ff;
+--floral-white: #fdf8ecff;
+--soft-blush: #f9d6d3ff;
+--ash-grey: #ccd5c3ff;
+",,,,
+Branding overhaul,,,JM,Done,,,,,,
+"Remove ""Zone Notes"" from the analysis",,Tools,JM,Done,,,,,,
+Feature: Batch update solution (captain-initiated),💡 Idea,,JM,Done,Launch Critical,"**MAYBE SOMETHING TO ADD**
+
+Option B: Update scripts (captain-initiated)
+Provide captains with a ""Run Updates"" button
+They paste a CSV/JSON of updates (sold lots, properties for sale, etc.)
+App applies updates to their sheet only
+You distribute update files, captains choose to apply
+
+
+Option C: Central ""suggestions"" sheet (read-only for you)
+You maintain a master sheet with suggested updates
+Captains can view it in the dashboard
+They manually approve/apply updates to their sheet
+One-way flow: you suggest, they decide",,,,
+"Add ""Recently Sold"" tag",,Details panel,JM,Done,,,,,,
+Feature: Add Records,💡 Idea,Neighbors,JM,Done,Launch Critical,"Figure out how to let people add records.
+
+What happens if a property sells?
+How should we treat it if a person moves away, or dies? Should we simply delete them from the database? Or tag them in such a way that they continue to live in the back-end but no longer in the front-end?
+
+How do we build this thing for the long road of recovery ahead, which will last years and include lots of new people moving to town?",,,,
+Sales Data,,,JM,Done,Low,"Do we integrate this and if so how? Would people like to able to see which lots have sold, and to whom they were sold?",,,,
+Household Status is changing to Property Status,,,JM,Done,,"Household Status is changing to Property Status and the options are:
+(not set)
+Rebuilding
+For sale
+Sold
+
+This should be integrated into the Address Data section of the Details panel as a drop-down menu.
+When Property Status = Rebuilding, then also show the Rebuild Stage field.
+",,,,
+Remove the colons,,Details panel,JM,Done,High,"Remove the colons from the following:
+Indoors Remediated?:
+Soil Remediated?:
+Renter:
+Needs Follow-Up:",,,,
+"remove ""Zone"" from  zone name",💡 Idea,Other/general,,Done,,in the top right,john,,12/18/2025 1:27pm,
+Add ability to edit or remove people,💡 Idea,Details panel,,Done,Launch Critical,,,,12/18/2025 1:58pm,
+Property status dropdown in FILTERS menu options are wrong! ,🐛 Bug,Map,,Done,,mismatched to ones that appear in the details,,,12/18/2025 2:00pm,
+map load weirdness,,Map,,Done,,,,,2/3/2026 10:17am,
+"Map zoomed in too far by default, i think?",🐛 Bug,Map,,Done,,,,,2/3/2026 10:40am,
+Ability to have people with no address,,Neighbors,,Done,,,,,2/3/2026 11:20am,
+"Add Former Resident checkbox for person, ",,,,Done,High,Make it gray out their name but still show them in the dashboard.,,,2/3/2026 11:23am,
+"Resolve the ""Property Status"" column",,,,Done,,What do we really want to track here?,,,2/4/2026 9:58am,
+Embed Courage's calendar,,Resources,,Done,,,jm,,2/13/2026 9:58am,
+Embed Altagether's calendar,,Resources,,Done,,,jm,,2/13/2026 9:58am,
+Add links to Directory at the top of My NC Profile,,Resources,,Done,,,,,2/13/2026 10:09am,
+Search function to find people,,Neighbors,,Done,,,,,2/13/2026 2:40pm,
+Add Person Search to the Filters section,,Neighbors,,Done,,,jm,,2/16/2026 9:53am,
+Fix log-in issue wherein people are asked constantly to 2FA on their phones,🪐 Other,Other/general,,Done,,,jm,,2/16/2026 9:54am,
+Need to add an address to my block -2826 St. James Place,🪐 Other,Map,,Done,,"2826 St. James Place appears on my map, but doesn't have a dot on it, nor is there a record for it on the original spreadsheet. I've just made contact with the owner and want to add them.
+
+John emailed David back about this and marked as Done.",David ,Screenshot 2026-02-27 at 2.09.45 PM.png (https://v5.airtableusercontent.com/v3/u/51/51/1775203200000/jFSkP3Mx1i3CB_dudoJYsA/OH1X25GVp-Ma6XXYdOG4vfbrAbMd21PUTBWsPqrTJlJ84DurJ_LzsNC4Mll0jQd5EjOjPBL3nL8uIPypHRMPeu2NHMPZBzbEOQ-a0txD-h6g_iw8C9CmKvGr1NguLgbW43O-r3pAnyVr9l7iuJsnisAqyXynDCV1vT0wbsdlWMOJdlbyJcB6AVx8Yf84zs0S/D5atp3uYLbKFgxO8jjVC-r7eaJfONz4CizlW_ZzfQaA),2/27/2026 2:12pm,
+Add custom-styled hover-overs with detailed explainers.,,About,JM,Todo,,,,,,
+Fix bug where only some phone numbers appaear in the printable list view,,Neighbors,JM,Todo,,,,,,
+Add Hover-Over Tooltips to Filters and most items in the Details panel,,Other/general,JM,Todo,High,"Explain in the app what we mean by ""Contact""",,,,
+Revise conflicts in address-level data,,,JM,Todo,,"There's an issue arising wherein an address that has, for instance 5 people at it, but for some reason only some of the people have the damage marked, then the ""Damage:"" part doesnt' show up at all in the addresses panel. How should we address this? Or is it maybe unnecessary to fix cuz it's just a quirk of how i've made the test spreadsheet?
+
+Do you understand what I mean?",,,,
+Add Other as an option to Address Plan,💡 Idea,Neighbors,,Todo,,"seems like we need more options. Eg, someone who hasn't decided, someone who is keeping it vacant, renting the land out to someone for construction purposes, etc. Let's just capture these as ""Other"" and people can write in the Address Notes.",john,,12/18/2025 1:29pm,
+Revisit the way names are styled on the Actions tab,,Actions,,Todo,Low,Seems like overkill to have them be yellow buttons. Also it looks nuts for people with long names.,john,,12/18/2025 1:54pm,
+"In the Zone Map, cannot view full damage status key",🐛 Bug,,,Todo,Launch Critical,I cannot scroll down on the damage status key to see all the damage status options in the zone map. ,Megan,Screenshot 2025-12-19 at 6.30.45 PM.png (https://v5.airtableusercontent.com/v3/u/51/51/1775203200000/EebeopwM0Joz2PeHSTNiUw/2-UJy4BKt75xbfSEYljpqr90MuwBL1lDHeYTJGMRdeAHB2nqO_kd6SCJnicKog50-_JJTu96M9s3tbxm-Gi3YgCe7oRr-RVNekaGk_qWRgYcXvLTfa88A-A7F6y6wVxtadn_gRJAr-wOrDUq1E7d_bjwp486qnaIOrl3xwcEqzMyLRWuBMR5fGy3jDvgQKSZ/MJOItjwKB7HB2XDS9EfGdLKijcNikcuSP2z_U-By1FY),12/19/2025 6:33pm,
+Revise the #s at the top of the Home page,,,,Todo,Launch Critical,"In Construction
+Rebuilding
+?",,,1/30/2026 11:48am,
+Zone Notes is a defunct feature. Remove?,,,,Todo,Medium,"I'm seeing errors regarding ""Zone Notes"". Zone Notes is a defunct feature. We can remove it from the platform, unless you think there is a risk of breaking things if we do that. ",,,2/4/2026 12:42pm,
+Get the Neighborhood Directory up and running,,,,Todo,,"Add to the top of the page:
+
+This directory is for Altagether Neighborhood Captains to help them get in touch with each other. Please do not share this link with commercial entities.
+
+Captains can set their profile information within the Zone Dashboard. If you don't have access to the dashboard, please email john@altagether.org to get set up with access or to add your info the old fashioned way.",,,2/4/2026 12:43pm,
+Add actions,,Actions,JM,In progress,Medium,"Low Lift:
+Forward newsletter
+Send group text intro
+
+Medium Lift:
+Do a 30-minute porch meetup
+Canvas 3 nearest homes
+
+High Lift
+Host a zone meetup",,,,
+Revise the Print layout,,Neighbors,JM,In progress,Launch Critical,It's currently not legible enough,,,,
+Timing out while active?,🐛 Bug,Home,,Todo,High,"Hiya, 
+I was actively exploring (on the RESOURCES page) and it asked me to log in again. I'm assuming that was at the one-hour mark? But I don't know if that is a bug or designed that way? Sorry, I took a screenshot (snipped it) but am too lazy to create a file to upload. I'll send you an email.",Steph Pinto,,2/12/2026 8:15pm,
+Fix how interests work & display in the directory,,,,Todo,High,"You rearranged Utilities in the Google Sheet on 3.23. You need to make sure that they all appear as options in the Profile page, and then on the Directory as well.",,,3/23/2026 7:59pm,
+Add “person details” modal,,,,Todo,High,"Add “person details” modal — 
+user can click any person’s name in the Details panel and a modal of that person pops up. Same dimensions and design as the newsletter modal and add record modal. This modal contains all the same information about the person as is shown in the Details panel, but it also includes additional features & options. While Details displays Quick Tags, the Person modal will display All Tags — Quick Tags plus additional checkboxes and dropdowns. (Note that what I am describing here includes a change to the Details panel, changing Tags to Quick Tags.)
+Within this new Person modal (but not elsewhere!) there is an option to tag the person as a “former resident”, plus a notes field alongside that checkbox. When that box is checked, this person will then no longer appear listed in the Details panel. Instead, for addresses that have a former resident associated with it, a small header “Former Residents” will appear at the bottom of the panel, with a list of each former resident underneath. All of this text should be smaller and grayed out in comparison to the main text in the Details panel. Click on a name in the former residents list to open the Person modal where User could then un-mark the person as being a former resident, thereby returning them to the normal flow within the Details panel.",,,3/30/2026 10:49am,
+Devise and implement Deceased and Former Resident logic,,,,Todo,High,Should these people count toward contact rates? Should their emails be dropped out entirely?,,,3/31/2026 3:39pm,
+Maybe add ability to move a pin after the fact,,,,Todo,Low,"Angie request:
+Is there any way to fix a pin on the map? I accidentally put a pin in the wrong location on the map.",,,3/31/2026 6:06pm,
+Build out Address Details modal,,,,Todo,,,,,4/2/2026 10:09pm,
+Figure out a new way for contact logging to work,,,,Todo,,,,,4/2/2026 10:09pm,
+"Add ""Contacted"" as an option for Batch Tag",,,,Todo,,,,,4/2/2026 10:09pm,
+Expand options for Batch Tag in general,,,,Todo,,"Contacted
+Newsletter Subscriber
+Moved Away",,,4/2/2026 10:09pm,
+Add more actions,,,,Todo,,,,,4/2/2026 10:10pm,
+Build out an Event Planner wizard,,,,Todo,,Idk how the data storage element is gonna work tho,,,4/2/2026 10:11pm,
+Create a drip campaign to drive and hold engagement,,,,Todo,,6 month timeline,,,4/2/2026 10:11pm,
