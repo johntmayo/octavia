@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altagether Zone Dashboard Roadmap Studio</title>
+  <style>
+    :root {
+      --bg: #0e111b;
+      --panel: #161b2a;
+      --ink: #e8ecff;
+      --muted: #aeb8de;
+      --line: #2a3355;
+      --accent: #8cf5cf;
+      --accent-2: #94b5ff;
+      --danger: #ff8ea6;
+      --gold: #ffd277;
+      --shadow: 0 18px 40px rgba(7, 10, 19, 0.45);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% -10%, rgba(148,181,255,.25), transparent 36%),
+        radial-gradient(circle at 95% 5%, rgba(140,245,207,.18), transparent 28%),
+        var(--bg);
+      min-height: 100vh;
+    }
+    .wrap {
+      width: min(780px, 94vw);
+      margin: 22px auto;
+      padding-bottom: 30px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .orb {
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      background: conic-gradient(from 140deg, var(--accent), var(--accent-2), var(--gold), var(--accent));
+      box-shadow: 0 0 18px rgba(148, 181, 255, .6);
+    }
+    .card {
+      background: linear-gradient(185deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(4px);
+    }
+    h1 { margin: 0 0 6px; font-size: clamp(22px, 4.8vw, 32px); }
+    h2 { margin: 0 0 6px; font-size: 18px; }
+    p { margin: 6px 0; color: var(--muted); line-height: 1.45; }
+    .progress {
+      height: 10px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      margin: 12px 0 16px;
+      background: rgba(255,255,255,.02);
+    }
+    .progress > div {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      transition: width .2s ease;
+    }
+    .grid { display: grid; gap: 10px; }
+    @media (min-width: 650px) {
+      .grid.two { grid-template-columns: 1fr 1fr; }
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(11, 14, 24, .75);
+      color: var(--ink);
+      padding: 10px 12px;
+      font: inherit;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      color: #051218;
+      background: var(--accent);
+    }
+    button.secondary {
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+    }
+    button.warn {
+      background: var(--gold);
+      color: #291700;
+    }
+    button.danger {
+      background: var(--danger);
+      color: #24000a;
+    }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .pill.active {
+      background: rgba(140,245,207,.16);
+      border-color: var(--accent);
+    }
+    .tiny { font-size: 12px; color: #94a0cb; }
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .kpi > div {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .kpi b { display: block; font-size: 19px; margin-bottom: 2px; }
+    .hidden { display: none; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><span class="orb"></span> Altagether · Zone Dashboard · Roadmap Studio</div>
+
+    <div class="card">
+      <h1>Roadmap Game Mode</h1>
+      <p>Fast, bedtime-friendly consulting flow. Swipe through priorities, auto-score for value, and export a clean Airtable-ready CSV.</p>
+      <div class="progress"><div id="progressBar"></div></div>
+      <p class="tiny" id="stepLabel">Step 1 of 5</p>
+    </div>
+
+    <section id="step-1" class="card">
+      <h2>1) Load your backlog</h2>
+      <p>Use the current export or upload a fresh Airtable CSV. Nothing leaves your device; data is stored in local storage only.</p>
+      <div class="btn-row">
+        <button id="loadBundled">Load bundled CSV</button>
+        <input id="csvFile" type="file" accept=".csv" />
+      </div>
+      <p class="tiny" id="loadMsg">No data loaded yet.</p>
+    </section>
+
+    <section id="step-2" class="card hidden">
+      <h2>2) Strategy checkpoint</h2>
+      <p>Set the runway so scoring stays anchored in what matters right now.</p>
+      <div class="grid two">
+        <div>
+          <label for="targetUsers">Target users by release date</label>
+          <input id="targetUsers" type="text" value="175" />
+        </div>
+        <div>
+          <label for="releaseDate">Next release window</label>
+          <input id="releaseDate" type="text" placeholder="e.g., May 2026" />
+        </div>
+      </div>
+      <label>Primary outcome for this cycle</label>
+      <div class="pill-row" id="outcomePills"></div>
+    </section>
+
+    <section id="step-3" class="card hidden">
+      <h2>3) Consultative sorting</h2>
+      <p>One card at a time: keep, revise, or cut. Then we auto-assign release buckets.</p>
+      <div id="reviewPanel" class="hidden">
+        <p class="tiny" id="cardCount"></p>
+        <h3 id="cardTitle"></h3>
+        <p id="cardDesc"></p>
+        <div class="grid two">
+          <div>
+            <label>Value impact</label>
+            <div class="pill-row" id="impactPills"></div>
+          </div>
+          <div>
+            <label>Delivery effort</label>
+            <div class="pill-row" id="effortPills"></div>
+          </div>
+        </div>
+        <label for="notesBox">Revision notes (optional)</label>
+        <textarea id="notesBox" placeholder="What to change so this is clearer, smaller, or more valuable?"></textarea>
+        <div class="btn-row">
+          <button id="keepBtn">Keep</button>
+          <button class="warn" id="reviseBtn">Revise</button>
+          <button class="danger" id="cutBtn">Cut</button>
+        </div>
+      </div>
+      <p id="reviewDone" class="hidden">All cards reviewed. Next we'll inject suggested features and produce release lanes.</p>
+    </section>
+
+    <section id="step-4" class="card hidden">
+      <h2>4) Add fresh ideas</h2>
+      <p>Tap templates tuned for engagement and organizer value. Edit before export if you want.</p>
+      <div class="pill-row" id="ideaTemplates"></div>
+      <label for="customIdea">Or add your own</label>
+      <textarea id="customIdea" placeholder="Type a new feature idea..."></textarea>
+      <div class="btn-row">
+        <button id="addIdeaBtn">Add idea</button>
+      </div>
+      <p class="tiny" id="ideaCount">0 new ideas added</p>
+    </section>
+
+    <section id="step-5" class="card hidden">
+      <h2>5) Export</h2>
+      <p>Download two files:</p>
+      <ul>
+        <li><b>roadmap_delta.csv</b> → rows tagged Add / Revise / Delete</li>
+        <li><b>roadmap_full_recommended.csv</b> → complete refreshed backlog</li>
+      </ul>
+      <div class="kpi" id="summaryKpis"></div>
+      <div class="btn-row">
+        <button id="downloadDelta">Download roadmap_delta.csv</button>
+        <button class="secondary" id="downloadFull">Download roadmap_full_recommended.csv</button>
+        <button class="secondary" id="resetAll">Reset local data</button>
+      </div>
+      <p class="tiny mono" id="exportHint"></p>
+    </section>
+
+    <div class="card">
+      <div class="btn-row">
+        <button class="secondary" id="prevStep">Back</button>
+        <button id="nextStep">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'altagether-roadmap-v1';
+    const outcomes = [
+      'Activation (new users take first key action)',
+      'Retention (weekly return usage)',
+      'Organizer efficiency (less admin overhead)',
+      'Trust + data quality (cleaner updates, fewer gaps)'
+    ];
+    const templateIdeas = [
+      {
+        title: 'Weekly Win Digest + Nudges',
+        desc: 'Auto-summary each week: wins, outstanding actions, and one-tap follow-up prompts to keep captains active.',
+        section: 'Engagement'
+      },
+      {
+        title: 'Captain Health Meter',
+        desc: 'Simple zone health score combining contact rate, recency, and overdue tasks with suggested next best action.',
+        section: 'Insights'
+      },
+      {
+        title: 'Action Queue (15-minute mode)',
+        desc: 'A focused queue that offers only high-impact tasks that can be done quickly from mobile.',
+        section: 'Tools'
+      },
+      {
+        title: 'Story Bank',
+        desc: 'Capture and tag success stories so organizers can reuse scripts and motivate volunteers.',
+        section: 'Community'
+      }
+    ];
+
+    const state = {
+      step: 1,
+      rawRows: [],
+      headers: [],
+      reviewed: [],
+      index: 0,
+      targetUsers: '175',
+      releaseDate: '',
+      primaryOutcome: outcomes[0],
+      addedIdeas: []
+    };
+
+    const el = (id) => document.getElementById(id);
+
+    function escapeCSV(v) {
+      const s = (v ?? '').toString().replace(/\r?\n/g, '\n');
+      return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let i = 0, field = '', row = [], inQ = false;
+      while (i < text.length) {
+        const c = text[i];
+        if (inQ) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { field += '"'; i += 2; continue; }
+            inQ = false;
+          } else {
+            field += c;
+          }
+        } else if (c === '"') {
+          inQ = true;
+        } else if (c === ',') {
+          row.push(field); field = '';
+        } else if (c === '\n') {
+          row.push(field); rows.push(row); row = []; field = '';
+        } else if (c !== '\r') {
+          field += c;
+        }
+        i++;
+      }
+      if (field.length || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        Object.assign(state, parsed);
+      } catch {}
+    }
+
+    function renderPills(container, options, current, onPick) {
+      const node = el(container);
+      node.innerHTML = '';
+      options.forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'pill' + (o === current ? ' active' : '');
+        b.textContent = o;
+        b.onclick = () => onPick(o);
+        node.appendChild(b);
+      });
+    }
+
+    function computePriority(impact, effort) {
+      if (impact === 'High' && effort === 'Low') return 'P0';
+      if (impact === 'High' && effort === 'Medium') return 'P1';
+      if (impact === 'Medium' && effort === 'Low') return 'P1';
+      if (impact === 'High') return 'P2';
+      if (impact === 'Medium') return 'P2';
+      return 'P3';
+    }
+
+    function laneFor(priority) {
+      if (priority === 'P0' || priority === 'P1') return 'Now';
+      if (priority === 'P2') return 'Next';
+      return 'Later';
+    }
+
+    function normalizeRows() {
+      state.reviewed = state.rawRows.map((row, idx) => {
+        const obj = {};
+        state.headers.forEach((h, i) => obj[h] = row[i] || '');
+        return {
+          ...obj,
+          _id: idx + 1,
+          _decision: '',
+          _impact: 'Medium',
+          _effort: 'Medium',
+          _notes: '',
+          _priorityBand: 'P2',
+          _releaseLane: 'Next'
+        };
+      });
+      state.index = 0;
+    }
+
+    function showStep() {
+      for (let i = 1; i <= 5; i++) el(`step-${i}`).classList.toggle('hidden', i !== state.step);
+      el('stepLabel').textContent = `Step ${state.step} of 5`;
+      el('progressBar').style.width = `${(state.step / 5) * 100}%`;
+      el('prevStep').disabled = state.step === 1;
+      el('nextStep').disabled = state.step === 5;
+      if (state.step === 3) renderReviewCard();
+      if (state.step === 5) renderSummary();
+      saveState();
+    }
+
+    function renderReviewCard() {
+      if (!state.reviewed.length) {
+        el('reviewPanel').classList.add('hidden');
+        el('reviewDone').classList.remove('hidden');
+        return;
+      }
+      const pending = state.reviewed.filter(r => !r._decision);
+      if (!pending.length) {
+        el('reviewPanel').classList.add('hidden');
+        el('reviewDone').classList.remove('hidden');
+        return;
+      }
+      el('reviewDone').classList.add('hidden');
+      el('reviewPanel').classList.remove('hidden');
+      const card = pending[0];
+      el('cardCount').textContent = `${state.reviewed.length - pending.length + 1} / ${state.reviewed.length}`;
+      el('cardTitle').textContent = card['\ufeffTitle'] || card['Title'] || '(Untitled)';
+      el('cardDesc').textContent = card['Description'] || 'No description yet.';
+      el('notesBox').value = card._notes;
+      renderPills('impactPills', ['Low','Medium','High'], card._impact, (val) => { card._impact = val; saveState(); renderReviewCard(); });
+      renderPills('effortPills', ['Low','Medium','High'], card._effort, (val) => { card._effort = val; saveState(); renderReviewCard(); });
+
+      const decide = (decision) => {
+        card._notes = el('notesBox').value.trim();
+        card._decision = decision;
+        card._priorityBand = computePriority(card._impact, card._effort);
+        card._releaseLane = laneFor(card._priorityBand);
+        saveState();
+        renderReviewCard();
+      };
+      el('keepBtn').onclick = () => decide('Keep');
+      el('reviseBtn').onclick = () => decide('Revise');
+      el('cutBtn').onclick = () => decide('Delete');
+    }
+
+    function rowsForExport() {
+      const sourceTitleCol = state.headers.find(h => h.includes('Title')) || state.headers[0];
+      const base = state.reviewed.map(r => ({
+        ...r,
+        'Action': r._decision === 'Delete' ? 'Delete' : (r._decision === 'Revise' ? 'Revise' : 'Keep'),
+        'Roadmap Priority Band': r._priorityBand,
+        'Release Lane': r._releaseLane,
+        'Coach Notes': r._notes,
+        'Cycle Outcome': state.primaryOutcome,
+        'Target Users': state.targetUsers,
+        'Release Window': state.releaseDate
+      }));
+
+      const ideas = state.addedIdeas.map((idea, i) => {
+        const obj = {};
+        state.headers.forEach(h => obj[h] = '');
+        obj[sourceTitleCol] = idea.title;
+        obj['Type'] = '💡 Idea';
+        obj['Section'] = idea.section || 'Tools';
+        obj['Source'] = 'Roadmap Studio';
+        obj['Status'] = 'Backlog';
+        obj['Priority'] = 'High';
+        obj['Description'] = idea.desc;
+        obj['Action'] = 'Add';
+        obj['Roadmap Priority Band'] = 'P1';
+        obj['Release Lane'] = 'Next';
+        obj['Coach Notes'] = 'Suggested during roadmap game mode';
+        obj['Cycle Outcome'] = state.primaryOutcome;
+        obj['Target Users'] = state.targetUsers;
+        obj['Release Window'] = state.releaseDate;
+        obj['_id'] = `new-${i}`;
+        return obj;
+      });
+
+      return { base, ideas, all: [...base.filter(r => r.Action !== 'Delete'), ...ideas] };
+    }
+
+    function toCSV(rows) {
+      const cols = [...state.headers, 'Action', 'Roadmap Priority Band', 'Release Lane', 'Coach Notes', 'Cycle Outcome', 'Target Users', 'Release Window'];
+      const lines = [cols.map(escapeCSV).join(',')];
+      rows.forEach(r => lines.push(cols.map(c => escapeCSV(r[c] || '')).join(',')));
+      return lines.join('\n');
+    }
+
+    function download(name, text) {
+      const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function renderSummary() {
+      const { base, ideas } = rowsForExport();
+      const keep = base.filter(r => r.Action === 'Keep').length;
+      const revise = base.filter(r => r.Action === 'Revise').length;
+      const cut = base.filter(r => r.Action === 'Delete').length;
+      const html = [
+        ['Keep', keep],
+        ['Revise', revise],
+        ['Cut', cut],
+        ['New ideas', ideas.length],
+        ['Now lane', base.filter(r => r['Release Lane'] === 'Now' && r.Action !== 'Delete').length],
+        ['Next lane', base.filter(r => r['Release Lane'] === 'Next' && r.Action !== 'Delete').length + ideas.length]
+      ].map(([k,v]) => `<div><b>${v}</b><span>${k}</span></div>`).join('');
+      el('summaryKpis').innerHTML = html;
+      el('exportHint').textContent = `Outcome focus: ${state.primaryOutcome} · Target users: ${state.targetUsers} · Release: ${state.releaseDate || 'not set'}`;
+    }
+
+    function setup() {
+      renderPills('outcomePills', outcomes, state.primaryOutcome, (v) => { state.primaryOutcome = v; saveState(); showStep(); });
+      const ideasBox = el('ideaTemplates');
+      ideasBox.innerHTML = '';
+      templateIdeas.forEach((idea) => {
+        const b = document.createElement('button');
+        b.className = 'pill';
+        b.textContent = `+ ${idea.title}`;
+        b.onclick = () => {
+          state.addedIdeas.push(idea);
+          el('ideaCount').textContent = `${state.addedIdeas.length} new ideas added`;
+          saveState();
+        };
+        ideasBox.appendChild(b);
+      });
+
+      el('targetUsers').value = state.targetUsers;
+      el('releaseDate').value = state.releaseDate;
+      el('targetUsers').onchange = () => { state.targetUsers = el('targetUsers').value.trim(); saveState(); };
+      el('releaseDate').onchange = () => { state.releaseDate = el('releaseDate').value.trim(); saveState(); };
+
+      el('loadBundled').onclick = async () => {
+        const txt = await fetch('Table 1-Everything.csv').then(r => r.text());
+        const rows = parseCSV(txt);
+        state.headers = rows[0];
+        state.rawRows = rows.slice(1).filter(r => r.some(c => c && c.trim()));
+        normalizeRows();
+        el('loadMsg').textContent = `Loaded ${state.rawRows.length} rows from bundled CSV.`;
+        saveState();
+      };
+
+      el('csvFile').onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const txt = await file.text();
+        const rows = parseCSV(txt);
+        state.headers = rows[0];
+        state.rawRows = rows.slice(1).filter(r => r.some(c => c && c.trim()));
+        normalizeRows();
+        el('loadMsg').textContent = `Loaded ${state.rawRows.length} rows from ${file.name}.`;
+        saveState();
+      };
+
+      el('addIdeaBtn').onclick = () => {
+        const raw = el('customIdea').value.trim();
+        if (!raw) return;
+        state.addedIdeas.push({ title: raw.slice(0, 70), desc: raw, section: 'Tools' });
+        el('customIdea').value = '';
+        el('ideaCount').textContent = `${state.addedIdeas.length} new ideas added`;
+        saveState();
+      };
+
+      el('downloadDelta').onclick = () => {
+        const { base, ideas } = rowsForExport();
+        download('roadmap_delta.csv', toCSV([...base, ...ideas]));
+      };
+      el('downloadFull').onclick = () => {
+        const { all } = rowsForExport();
+        download('roadmap_full_recommended.csv', toCSV(all));
+      };
+
+      el('resetAll').onclick = () => {
+        if (!confirm('Clear saved roadmap session?')) return;
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      };
+
+      el('nextStep').onclick = () => { if (state.step < 5) { state.step += 1; showStep(); } };
+      el('prevStep').onclick = () => { if (state.step > 1) { state.step -= 1; showStep(); } };
+
+      if (state.headers.length) {
+        el('loadMsg').textContent = `Restored session with ${state.rawRows.length} rows.`;
+      }
+      el('ideaCount').textContent = `${state.addedIdeas.length} new ideas added`;
+      showStep();
+    }
+
+    loadState();
+    setup();
+  </script>
+</body>
+</html>
